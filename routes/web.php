@@ -37,5 +37,7 @@ Route::get('booking', 'BookingController@ShowBooking');
 Route::get('coaches', 'UserController@ShowCoachesList');
 Route::post('stepBooking/{step}', 'BookingController@StepBooking');
 Route::get('availability', 'BookingController@ShowAvailability');
+Route::get('reviews', 'BookingController@ShowReviews');
+Route::get('complete_session', 'BookingController@ShowCompleteSession');
 /* End Booking Section */
 

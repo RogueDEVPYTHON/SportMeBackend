@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Booking;
+use App\Models\Feedback;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
@@ -18,6 +19,34 @@ class BookingController extends Controller
     public function __construct(){
 
     }
+
+    /**
+     * Show Reviews Page
+     * 
+     * @return view
+     */
+    public function ShowReviews(){
+        $data['title'] = "Reviews";
+        $data['user'] = Users::where('id', auth()->user()->id)->first();
+        $data['reviews'] = Feedback::where('coach_id', auth()->user()->id)->get();
+        $total = 0;
+        foreach($data['reviews'] as $review){
+            $total += $review->rating;
+        }
+        $data['average'] = (float)$total/count($data['reviews']);
+        return view('reviews', $data);
+    }
+    /**
+     * Show Completed Session
+     * 
+     * @return view
+     */
+    public function ShowCompleteSession(){
+        $data['title'] = 'Complete Session';
+        $data['user'] = Users::where('id', auth()->user()->id)->first();
+        $data['sessions'] = Booking::where('is_completed', 1)->where('customer_id',auth()->user()->id)->get();
+        return view('session', $data);
+    }    
 
     /**
      * Show Booking page

@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Model
-{
-    /**
+class Feedback extends Model
+{/**
     * The table associated with the model.
     *
     * @var string
     */
-    protected $table = 'booking';
+    protected $table = 'feedback';
    
     /**
      * Indicates if the model should be timestamped.
@@ -33,13 +32,9 @@ class Booking extends Model
      * @var array
      */
     protected $fillable = [
-        'coach_id',
-        'custommer_id',
-        'appointment_date',
-        'location',
-        'start_time',
-        'end_time',
-        'is_completed',
+        'booking_id',
+        'rating',
+        'description',
     ];
     /**
      * The attributes that should be mutated to dates.

@@ -9,9 +9,9 @@
         <li><a href="{{ url('booking') }}" class="type3 @if($title == 'Booking') active @endif">Bookings</a></li>
         @if($currentuser->user_type == 2)
         <li><a href="{{ url('availability') }}" class="type4 @if($title == 'Availability') active @endif">Availibility</a></li>
-        <li><a href="#" class="type6">Reviews</a></li>
+        <li><a href="{{ url('reviews') }}" class="type6 @if($title == 'Reviews') active @endif">Reviews</a></li>
         @else
-        <li><a href="#" class="type4">Completed Sessions</a></li>
+        <li><a href="{{ url('complete_session') }}" class="type4 @if($title == 'Complete Session') active @endif">Completed Sessions</a></li>
         <li><a href="{{ url('coaches') }}" class="type9 @if($title == 'Coaches') active @endif">Coaches</a></li>
         @endif
         <li><a href="#" class="type5">Payments</a></li>

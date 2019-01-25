@@ -22,436 +22,75 @@
                             <div>Thu</div>
                             <div>Fri</div>
                             <div>Sat</div>
-                            </div>
+                            </div><?php
+                            $this_year = date("Y"); 
+                            $this_month = date("m");
+                            $first_date = $this_year.'-'.$this_month.'-'.'01';
+ 
+                            //Convert the date string into a unix timestamp.
+                            $unixTimestamp = strtotime($first_date);
+                             
+                            //Get the day of the week using PHP's date function.
+                            $firstdayOfWeek = date("N", $unixTimestamp);
+                            ?>
                             <div class="calendar__week">
+                                @for($i=0;$i<$firstdayOfWeek;$i++)
                                 <div class="calendar__day day"></div>
+                                @endfor
+                                <?php
+                                if(!empty($user->photo)){
+                                    $files = Storage::files($user->photo);
+                                }
+                                ?>
+									<!--<div class="image-block">
+										
+									@if(!empty($user->photo) && count($files) != 0)
+										<img width="150" height="150" style="border-radius:50%" src="{{ url('storage/'.$files[0]) }}" alt="">
+									@else
+										<img src="{{ url('img/Blank_Ava4tar.png') }}" width="150" style="border-radius:50%" alt="">
+									@endif-->
+                                @for($i=1;$i<32;$i++)
+                                    <?php
+                                    $date = $this_year.'-'.$this_month.'-'.sprintf('%02d', $i);
+                                    $daybooking = App\Models\Booking::where('customer_id', auth()->user()->id)->where('appointment_date', $date)->first();
+                                    
+                                    ?>
+                                    <div class="calendar__day day" 
+                                    @if(!empty($daybooking))
+                                    <?php
+                                        $coach = App\Models\Users::where('id', $daybooking->coach_id)->first();
+                                        $dayweek = date("l", strtotime($date));
+                                        if(!empty($coach->photo)){
+                                            $files = Storage::files($coach->photo);
+                                        }
+                                    ?>
+                                    data-container="body" data-toggle="popover" data-placement="top" title="Hours of {{ $date }}" data-content='<input type="text" placeholder="9:00am-11:00am" value="">
+                                        <span>{{ url('date("N", strtotime($date))') }}</span>
+                                        <div class="buttons">
+                                            <a href="#" class="set">Set hours</a>
+                                            <a href="#" class="cancel">Cancel</a>
+                                        </div>'
+                                    @endif
+                                    >
+                                    @if(!empty($daybooking))
+                                        <span class="date">{{ $date }}</span>
+                                        <span class="time">{{ $daybooking->start_time }}:00am-{{ $daybooking->end_time }}:00am,</span>
+                                        <div class="avatar-small">
+                                        @if(!empty($coach->photo) && count($files) != 0)
+                                            <img style="border-radius:50%" src="{{ url('storage/'.$files[0]) }}" alt="">
+                                        @else
+                                            <img src="{{ url('img/Blank_Avatar.png') }}" style="border-radius:50%" alt="">
+                                        @endif
+                                        </div>
+                                    @endif
+                                    </div>
+                                @endfor
+                                @for($i=$firstdayOfWeek;$i<4;$i++)
                                 <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                            </div>
-                            <div class="calendar__week">
-                               
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                            </div>
-                            <div class="calendar__week">
-                                <div class="calendar__day day"></div>
-                            
-                            
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                            </div>  
-                            <div class="calendar__week">
-                            
-                            <div class="calendar__day day"></div>	
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                
-                                <div class="calendar__day day"></div>
-                                <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                title="Hours of January 24, 2019"
-                                data-content='<input type="text" placeholder="9:00am-11:00am">
-                                <span>Tuesday</span>
-                                <div class="buttons">
-                                    <a href="#" class="set">Set hours</a>
-                                    <a href="#" class="cancel">Cancel</a>
-                                </div>'>
-                                    <span class="date">24</span>
-                                    <span class="time">9:00am-11:00pm,</span>
-                                </div>
-                                <div class="calendar__day day"></div>
-                                <div class="calendar__day day"></div>
-                            </div>
-                            <div class="calendar__week">
-                            
-                            
-                            <div class="calendar__day day"></div>
-                            
-                            <div class="calendar__day day"></div>
-                            
-                            <div class="calendar__day day"></div>
-                            
-                            <div class="calendar__day day"></div>
-                            <div class="calendar__day day">
-                                <span class="date"></span>
-                            </div>
-                            <div class="calendar__day day">
-                                <span class="date"></span>
-                            </div>
-                            <div class="calendar__day day"></div>
+                                @endfor
                             </div>
                         </div>
                     </div>
-                                <div class="calendar">
-                                    <div class="inner">
-                                        <div class="calendar__header">
-                                        <div>Sun</div>
-                                        <div>Mon</div>
-                                        <div>Tue</div>
-                                        <div>Wed</div>
-                                        <div>Thu</div>
-                                        <div>Fri</div>
-                                        <div>Sat</div>
-                                        </div>
-                                        <div class="calendar__week">
-                                        <div class="calendar__day day"></div>
-                                        <div class="calendar__day day"></div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 1, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">1</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 2, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">2</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 3, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">3</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 4, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">4</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day">
-                                            <span class="date">5</span>
-                                        </div>
-                                        </div>
-                                        <div class="calendar__week">
-                                            <div class="calendar__day day">
-                                                <span class="date">6</span>
-                                            </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 7, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">7</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 8, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">8</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 9, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">9</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 10, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">10</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 11, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">11</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day">
-                                            <span class="date">12</span>
-                                        </div>
-                                        </div>
-                                        <div class="calendar__week">
-                                        <div class="calendar__day day">
-                                            <span class="date">13</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 14, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">14</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 15, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">15</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 16, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">16</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 17, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">17</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 18, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">18</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day">
-                                            <span class="date">19</span>
-                                        </div>
-                                        </div>
-                                        <div class="calendar__week">
-                                        <div class="calendar__day day">
-                                            <span class="date">20</span>
-                                        </div>	
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 21, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">21</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 22, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">22</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 9, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">23</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 24, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">24</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 25, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">25</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day">
-                                            <span class="date">26</span>
-                                        </div>
-                                        </div>
-                                        <div class="calendar__week">
-                                        <div class="calendar__day day">
-                                            <span class="date">27</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 28, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">28</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 29, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-
-                                            <span class="date">29</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 30, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">30</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day" data-container="body" data-toggle="popover" data-placement="top" 
-                                        title="Hours of January 31, 2019"
-                                        data-content='<input type="text" placeholder="11:00am-7:00am">
-                                        <span>Tuesday</span>
-                                        <div class="buttons">
-                                            <a href="#" class="set">Set hours</a>
-                                            <a href="#" class="cancel">Cancel</a>
-                                        </div>'>
-                                            <span class="date">31</span>
-                                            <span class="time">9:00am-12:00pm,</span>
-                                            <span class="time">1:00pm-4:30pm</span>
-                                        </div>
-                                        <div class="calendar__day day">
-                                            <span class="date"></span>
-                                        </div>
-                                        <div class="calendar__day day">
-                                            <span class="date"></span>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
                 </div>
             </div>
         </div>
