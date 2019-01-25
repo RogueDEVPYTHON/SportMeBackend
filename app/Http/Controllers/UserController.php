@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Mail\VerificationMail;
+use Illuminate\Mail\Mailable;
+use Mail;
 
 class UserController extends Controller
 {
@@ -27,6 +30,30 @@ class UserController extends Controller
             return redirect('login');
         $data['title'] = 'User Profile';
         $data['user'] = Users::where('id', auth()->user()->id)->first();
+        return view('profile/profile', $data);
+    }
+
+    /**
+     * Send Verification Email
+     * 
+     * @return void
+     */
+    public function sendVerificationEmail(Request $request){
+        $currentuser = Users::where('id', auth()->user()->id)->first();
+        $data = ['username' => $currentuser->username,
+                'token' => $currentuser->remember_token,];
+        //return $request;
+        Mail::to($currentuser->email)->send(new VerificationMail($data));
+    }
+
+    /**
+     * Show the other's profile
+     * 
+     * @return view
+     */
+    public function ShowProfile($id){
+        $data['title'] = 'User Profile';
+        $data['user'] = Users::where('id', $id)->first();
         return view('profile/profile', $data);
     }
 

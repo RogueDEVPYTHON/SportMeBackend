@@ -16,6 +16,7 @@ Route::get('/', 'UserController@getProfile');
 Route::get('/profile', 'UserController@getProfile');
 Route::get('/editProfile', 'UserController@editProfile');
 Route::post('/editProfile', 'UserController@updateProfile');
+Route::get('showprofile/{id}', 'UserController@ShowProfile');
 /* End Profile Section */
 
 /* Login/SignUp */
@@ -28,10 +29,13 @@ Route::get('logout', 'UserController@Signout');
 /* Start Account Section */
 Route::get('account/{id}', 'UserController@getAccountInformation');
 Route::post('updateAccountInfo', 'UserController@updateAccountInfo');
+Route::post('sendVerificationEmail', 'UserController@sendVerificationEmail');
 /* End Account Section */
 
 /* Start Booking Section */
 Route::get('booking', 'BookingController@ShowBooking');
 Route::get('coaches', 'UserController@ShowCoachesList');
+Route::post('stepBooking/{step}', 'BookingController@StepBooking');
+Route::get('availability', 'BookingController@ShowAvailability');
 /* End Booking Section */
 

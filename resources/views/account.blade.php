@@ -166,7 +166,7 @@
 				        					<div class="col-12">
   	  					        				<h3>Verify Account with Email</h3>
   	  					        				<p>When you press button “Send Me Email” you wil receive an email, just go and click on link in email.</p>
-  	  					        				<a href="#" class="btn">Send me email</a>
+  	  					        				<a href="javascript:sendVerificationEmail()" class="btn">Send me email</a>
   	  					        			</div>
   	  					        		</div>
   	  					        	</div>
@@ -366,6 +366,18 @@
 		alert(location);
 		//$('#customerForm').submit();
 
+	}
+	function sendVerificationEmail(){
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+		$.post('/sendVerificationEmail', {},
+			function(data){
+				alert("Verification email is sent to your email.")
+			}
+		);
 	}
 </script>
 @endsection

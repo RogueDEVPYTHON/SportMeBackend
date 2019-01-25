@@ -24,7 +24,7 @@
                 }
                 ?>
                 <div class="avatar">
-                @if(!empty($currentuser->photo) && count(files) != 0)
+                @if(!empty($currentuser->photo) && count($files) != 0)
                     <img src="{{ url('storage/'.$files[0]) }}" width="64" height="64" alt="">
                 @else
                     <img src="{{ url('img/Blank_Avatar.png') }}" width="64" height="64" alt="">

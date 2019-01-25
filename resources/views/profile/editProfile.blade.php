@@ -18,7 +18,7 @@
 									?>
 									<div class="image-block">
 										
-									@if(!empty($user->photo) && count(files) != 0)
+									@if(!empty($user->photo) && count($files) != 0)
 										<img width="150" height="150" style="border-radius:50%" src="{{ url('storage/'.$files[0]) }}" alt="">
 									@else
 										<img src="{{ url('img/Blank_Avatar.png') }}" width="150" style="border-radius:50%" alt="">
