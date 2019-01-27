@@ -24,12 +24,16 @@ Route::get('login', 'Auth\LoginController@ShowLoginForm');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('signup', 'UserController@Signup_user');
 Route::get('logout', 'UserController@Signout');
+Route::get('showRegistrationForm', 'UserController@showRegistrationForm');
+Route::post('register', 'UserController@Register');
 /* Login/SignUp */
 
 /* Start Account Section */
 Route::get('account/{id}', 'UserController@getAccountInformation');
 Route::post('updateAccountInfo', 'UserController@updateAccountInfo');
 Route::post('sendVerificationEmail', 'UserController@sendVerificationEmail');
+Route::post('sendVerificationSMS', 'UserController@sendVerificationSMS');
+Route::post('checkAuthCode', 'UserController@checkAuthCode');
 /* End Account Section */
 
 /* Start Booking Section */
@@ -40,4 +44,9 @@ Route::get('availability', 'BookingController@ShowAvailability');
 Route::get('reviews', 'BookingController@ShowReviews');
 Route::get('complete_session', 'BookingController@ShowCompleteSession');
 /* End Booking Section */
+
+/* Start Payments Section */
+Route::get('payments', 'PaymentController@ShowPayments');
+Route::post('updatePayment', 'PaymentController@updatePayment');
+/* End Payments Section */
 

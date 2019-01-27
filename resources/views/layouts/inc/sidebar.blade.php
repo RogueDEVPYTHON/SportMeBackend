@@ -14,7 +14,7 @@
         <li><a href="{{ url('complete_session') }}" class="type4 @if($title == 'Complete Session') active @endif">Completed Sessions</a></li>
         <li><a href="{{ url('coaches') }}" class="type9 @if($title == 'Coaches') active @endif">Coaches</a></li>
         @endif
-        <li><a href="#" class="type5">Payments</a></li>
+        <li><a href="{{ url('payments') }}" class="type5 @if($title == 'Payments') active @endif">Payments</a></li>
         <li><a href="#" class="type7">Settings</a></li>
         <li>
             <a href="{{ url('logout') }}" class="type8">Logout</a>

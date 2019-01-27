@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use App\Mail\VerificationMail;
 use Illuminate\Mail\Mailable;
 use Mail;
+use Twilio\Rest\Client;
 
 class UserController extends Controller
 {
@@ -44,6 +45,55 @@ class UserController extends Controller
                 'token' => $currentuser->remember_token,];
         //return $request;
         Mail::to($currentuser->email)->send(new VerificationMail($data));
+    }
+
+    /**
+     * Send Verification SMS
+     * 
+     * @return void
+     */
+    public function sendVerificationSMS(){
+        $currentuser = Users::where('id', auth()->user()->id)->first();
+        // Your Account SID and Auth Token from twilio.com/console
+        $sid = env('TWILIO_ACCOUNT_SID');
+        $token = env('TWILIO_AUTH_TOKEN');
+        $client = new Client($sid, $token);
+        $rand = rand(1000,9999);
+        $currentuser->phone_authcode = $rand;
+        $currentuser->save();
+        // Use the client to do fun stuff like send text messages!
+        $client->messages->create(
+            // the number you'd like to send the message to
+            $currentuser->phone_number,
+            array(
+                // A Twilio phone number you purchased at twilio.com/console
+                'from' => env('TWILIO_REGISTER_NUMBER'),
+                // the body of the text message you'd like to send
+                'body' => "Your SportMe verified code is: ".$rand,
+            )
+        );
+    }
+    /**
+     * Show Registration Form
+     * 
+     * @return view
+     */
+    public function showRegistrationForm(){
+        return view('registration');
+    }
+
+    /**
+     * Check SMS verification Code
+     * 
+     * @return void
+     */
+    public function checkAuthCode(Request $request){
+        $currentuser = Users::where('id', auth()->user()->id)->first();
+        if($currentuser->phone_authcode == $request->code){
+            $currentuser->phone_verified = 1;
+            $currentuser->save();
+        }
+        return back();
     }
 
     /**
@@ -120,6 +170,29 @@ class UserController extends Controller
         $new_user->user_type = $request->radio5;
         $new_user->save();
         return redirect('account/'.$new_user->id);
+    }
+
+    /**
+     * Register User
+     * 
+     * @return void
+     */
+    public function Register(Request $request){
+        $new_user = new Users();
+        $new_user->user_type = $request->user_type;
+        $new_user->username = $request->first_name.' '.$request->last_name;
+        $new_user->first_name = $request->first_name;
+        $new_user->last_name = $request->last_name;
+        $new_user->email = $request->email;
+        $new_user->password = Hash::make($request->input('password'));
+        $new_user->birthday = $request->birthday;
+        $new_user->phone_number= $request->phone;
+        $new_user->save();
+        if($request->user_type == 2){
+            $data['user'] = $new_user;
+            return view('registration', $data);
+        }
+        return view('login');
     }
 
     /**

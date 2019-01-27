@@ -5,344 +5,83 @@
 
 	<meta charset="utf-8">
 
-	<title>Dashboard - {{ $title }}</title>
+	<title>Login</title>
 	<meta name="description" content="">
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<meta property="og:image" content="path/to/image.jpg">
-    <style>
-        body{
-            margin:0;
-            color:#6a6f8c;
-            background-color: rgba(245, 245, 245, 1);
-            font:600 16px/18px 'Open Sans',sans-serif;
-        }
-        input.switch {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            -o-appearance: none;
-            appearance: none;
-            width: 84px;
-            height: 47.25px;
-            border-radius: 47.25px;
-            box-shadow: inset -33.6px 0px 0px 0px rgba(220, 220, 220, 1);
-            border: 3.675px solid rgba(220, 220, 220, 1);
-            outline: none;
-            transition: 0.05s;
-            cursor: pointer;
-            background-color: rgba(255, 255, 255, 1);
-        }
-        .form-inline {
-            display: flex;
-        }
-        .form-check {
-            margin:5px 10px;x
-        }
-        input.switch:after {
-            content: "\2715";
-            font-size: 23.625px;
-            display: inline-flex;
-            justify-content: center;
-            width: 42px;
-            line-height: 47.25px;
-            position: relative;
-            z-index: 99;
-            left: 0;
-            top: -3.675px;
-            color: rgba(220, 220, 220, 1);
-            transition: 0.05s;
-        }
-        input.switch:checked {
-            box-shadow: inset 33.6px 0px 0px 0px rgba(33, 150, 243, 1);
-            border: 3.675px solid rgba(33, 150, 243, 1);
-        }
-        input.switch:checked + label.switch-label {
-            color: rgba(33, 150, 243, 1);
-        }
-        input.switch:checked:after {
-            content: "\2713";
-            left: 38.325px;
-            color: rgba(33, 150, 243, 1);
-        }
-        label.switch-label {
-            font-size: 23.625px;
-            height: 47.25px;
-            display: flex;
-            line-height: 47.25px;
-            padding: 0 0 0 21px;
-            color: rgba(220, 220, 220, 1);
-        }
-        input.radiobutton {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            -o-appearance: none;
-            appearance: none;
-            position: absolute;
-            display: inline-block;
-            width: 124px;
-            height: 83px;
-            border-radius: 8px;
-            box-shadow: inset 124px 124px 0px 124px rgba(220, 220, 220, 1);
-            outline: none;
-        }
-        input.radiobutton:checked {
-            box-shadow: inset 124px 124px 0px 124px rgba(33, 150, 243, 1);
-        }
-        input.radiobutton:checked + label.radiobutton-label {
-            color: white;
-        }
-        input.radiobutton:checked + label.radiobutton-label:after {
-            content: "\2713";
-            width: 32px;
-            height: 32px;
-            line-height: 32px;
-            border-radius: 32px;
-            background-color: white;
-            color: rgba(33, 150, 243, 1);
-            box-shadow: 0px 0px 0px 2px rgba(33, 150, 243, 1);
-            z-index: 999;
-            position: absolute;
-            top: -6px;
-            right: -6px;
-        }
-        label.radiobutton-label {
-            width: 124px;
-            height: 83px;
-            position: relative;
-            font-size: 23.625px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 10px;
-            color: rgba(169, 169, 169, 1);
-            text-align: center;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        label.radiobutton-label span {
-            font-size: 1rem;
-            font-weight: normal;
-        }
 
-        *,:after,:before{box-sizing:border-box}
-        .clearfix:after,.clearfix:before{content:'';display:table}
-        .clearfix:after{clear:both;display:block}
-        a{color:inherit;text-decoration:none}
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,600,700,700i" rel="stylesheet">
+	<!-- Header CSS (First Sections of Website: paste after release from header.min.css here) -->
+	<style></style>
 
-        .login-wrap{
-            width:100%;
-            margin:auto;
-            max-width:525px;
-            min-height:670px;
-            position:relative;
-            background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
-            box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-        }
-        .login-html{
-            width:100%;
-            height:100%;
-            position:absolute;
-            padding:90px 70px 50px 70px;
-            background:rgba(40,57,101,.9);
-        }
-        .login-html .sign-in-htm,
-        .login-html .sign-up-htm{
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-            position:absolute;
-            transform:rotateY(180deg);
-            backface-visibility:hidden;
-            transition:all .4s linear;
-        }
-        .login-html .sign-in,
-        .login-html .sign-up,
-        .login-form .group .check{
-            display:none;
-        }
-        .login-html .tab,
-        .login-form .group .label,
-        .login-form .group .button{
-            text-transform:uppercase;
-        }
-        .login-html .tab{
-            font-size:22px;
-            margin-right:15px;
-            padding-bottom:5px;
-            margin:0 15px 10px 0;
-            display:inline-block;
-            border-bottom:2px solid transparent;
-        }
-        .login-html .sign-in:checked + .tab,
-        .login-html .sign-up:checked + .tab{
-            color:#fff;
-            border-color:#1161ee;
-        }
-        .login-form{
-            min-height:345px;
-            position:relative;
-            perspective:1000px;
-            transform-style:preserve-3d;
-        }
-        .login-form .group{
-            margin-bottom:15px;
-        }
-        .login-form .group .label,
-        .login-form .group .input,
-        .login-form .group .button{
-            width:100%;
-            color:#fff;
-            display:block;
-        }
-        .login-form .group .input,
-        .login-form .group .button{
-            border:none;
-            padding:15px 20px;
-            border-radius:25px;
-            background:rgba(255,255,255,.1);
-        }
-        .login-form .group input[data-type="password"]{
-            text-security:circle;
-            -webkit-text-security:circle;
-        }
-        .login-form .group .label{
-            color:#aaa;
-            font-size:12px;
-        }
-        .login-form .group .button{
-            background:#1161ee;
-        }
-        .login-form .group label .icon{
-            width:15px;
-            height:15px;
-            border-radius:2px;
-            position:relative;
-            display:inline-block;
-            background:rgba(255,255,255,.1);
-        }
-        .login-form .group label .icon:before,
-        .login-form .group label .icon:after{
-            content:'';
-            width:10px;
-            height:2px;
-            background:#fff;
-            position:absolute;
-            transition:all .2s ease-in-out 0s;
-        }
-        .login-form .group label .icon:before{
-            left:3px;
-            width:5px;
-            bottom:6px;
-            transform:scale(0) rotate(0);
-        }
-        .login-form .group label .icon:after{
-            top:6px;
-            right:0;
-            transform:scale(0) rotate(0);
-        }
-        .login-form .group .check:checked + label{
-            color:#fff;
-        }
-        .login-form .group .check:checked + label .icon{
-            background:#1161ee;
-        }
-        .login-form .group .check:checked + label .icon:before{
-            transform:scale(1) rotate(45deg);
-        }
-        .login-form .group .check:checked + label .icon:after{
-            transform:scale(1) rotate(-45deg);
-        }
-        .login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
-            transform:rotate(0);
-        }
-        .login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
-            transform:rotate(0);
-        }
+	<!-- Load CSS, CSS Localstorage & WebFonts Main Function -->
+	<script>!function(e){"use strict";function t(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function n(t,n){return e.localStorage&&localStorage[t+"_content"]&&localStorage[t+"_file"]===n}function a(t,a){if(e.localStorage&&e.XMLHttpRequest)n(t,a)?o(localStorage[t+"_content"]):l(t,a);else{var s=r.createElement("link");s.href=a,s.id=t,s.rel="stylesheet",s.type="text/css",r.getElementsByTagName("head")[0].appendChild(s),r.cookie=t}}function l(e,t){var n=new XMLHttpRequest;n.open("GET",t,!0),n.onreadystatechange=function(){4===n.readyState&&200===n.status&&(o(n.responseText),localStorage[e+"_content"]=n.responseText,localStorage[e+"_file"]=t)},n.send()}function o(e){var t=r.createElement("style");t.setAttribute("type","text/css"),r.getElementsByTagName("head")[0].appendChild(t),t.styleSheet?t.styleSheet.cssText=e:t.innerHTML=e}var r=e.document;e.loadCSS=function(e,t,n){var a,l=r.createElement("link");if(t)a=t;else{var o;o=r.querySelectorAll?r.querySelectorAll("style,link[rel=stylesheet],script"):(r.body||r.getElementsByTagName("head")[0]).childNodes,a=o[o.length-1]}var s=r.styleSheets;l.rel="stylesheet",l.href=e,l.media="only x",a.parentNode.insertBefore(l,t?a:a.nextSibling);var c=function(e){for(var t=l.href,n=s.length;n--;)if(s[n].href===t)return e();setTimeout(function(){c(e)})};return l.onloadcssdefined=c,c(function(){l.media=n||"all"}),l},e.loadLocalStorageCSS=function(l,o){n(l,o)||r.cookie.indexOf(l)>-1?a(l,o):t(e,"load",function(){a(l,o)})}}(this);</script>
 
-        .hr{
-            height:2px;
-            margin:60px 0 50px 0;
-            background:rgba(255,255,255,.2);
-        }
-        .foot-lnk{
-            text-align:center;
-        }
-    </style>
+	<!-- Load CSS Start -->
+	<script>loadLocalStorageCSS( "webfonts", "css/fonts.min.css?ver=1.0.0" );</script>
+	<script>loadCSS( "css/header.min.css?ver=1.0.0", false, "all" );</script>
+	<script>loadCSS( "css/main.min.css?ver=1.0.0", false, "all" );</script>
+	<!-- Load CSS End -->
+
+	<!-- Load CSS Compiled without JS -->
+	<noscript>
+		<link rel="stylesheet" href="css/fonts.min.css">
+		<link rel="stylesheet" href="css/main.min.css">
+	</noscript>
+
 </head>
 
 <body>
-    <div class="login-wrap">
-        <div class="login-html">
-            <input id="tab-1" type="radio" name="tab" class="sign-in" ><label for="tab-1" class="tab">Sign In</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign Up</label>
-            <div class="login-form">  
-                <div class="sign-in-htm">
-                <form action="{{ url('login') }}" method="POST">
-                    @csrf
-                    <div class="group">
-                        <label for="user" class="label">Username</label>
-                        <input id="user" type="text" name="email" class="input">
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Password</label>
-                        <input id="pass" type="password" name="password" class="input" data-type="password">
-                    </div>
-                    <div class="group">
-                        <input id="check" type="checkbox" class="check" checked>
-                        <label for="check"><span class="icon"></span> Keep me Signed in</label>
-                    </div>
-                    <div class="group">
-                        <input type="submit" class="button" value="Sign In">
-                    </div>
-                    <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <a href="#forgot">Forgot Password?</a>
-                    </div>
-                </form>
-                </div>
-                <div class="sign-up-htm">
-                <form action="{{ url('signup') }}" method="POST">
-                @csrf
-                    <div class="group">
-                        <label for="user" class="label">Username</label>
-                        <input id="user" type="text" name="username" class="input" required>
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Password</label>
-                        <input id="pass" type="password" name="password" class="input" data-type="password" required>
-                    </div>
-                    <div class="group">
-                        <label for="pass" class="label">Repeat Password</label>
-                        <input id="pass" type="password" class="input" data-type="password" name="confirmed_password" required>
-                    </div>
-                    <div class="group">
-                        <label for="email" class="label">Email Address</label>
-                        <input id="email" type="text" name="email" class="input" required>
-                    </div>
-                    <div class="form-inline">
+<!-- Here our code  -->
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<form action="{{ url('login') }}" method="POST">
+				@csrf
+				<h2>START ON SPORTME</h2>
+				<div class="form-group">
+				    <input type="email" class="form-control" id="username" name="email" aria-describedby="emailHelp" placeholder="Username">
+				</div>
+				<div class="form-group">
+				    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+				</div>
+				<div class="form-group">
+					<input class="checkbox" id="checkbox-1" type="checkbox" name="checkbox" required="" checked>
+					<label for="checkbox-1">Remember me</label>
+				</div>
+				<div class="center">
+					<button type="submit" >Login</button>
+					<a href="{{ url('showRegistrationForm') }}" class="forgot">Sign Up</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
-                        <div class="form-check mr-3">
-                            <input checked class="radiobutton" type="radio" name="radio5" id="radio3" value="1"><label class="radiobutton-label" for="radio3"><span>Client</span></label>
-                        </div>
-                        <div class="form-check mr-3">
-                            <input class="radiobutton" type="radio" name="radio5" id="radio4" value="2"><label class="radiobutton-label" for="radio4"><span>Coach</span></label>
-                        </div>
-                    </div>
-                    <div class="group">
-                        <input type="submit" class="button" value="Sign Up">
-                    </div>
-                    <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <label for="tab-1">Already Member?</a>
-                    </div>
-                </form>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="hidden"></div>
+
+	<!--[if lt IE 9]>
+	<script src="libs/html5shiv/es5-shim.min.js"></script>
+	<script src="libs/html5shiv/html5shiv.min.js"></script>
+	<script src="libs/html5shiv/html5shiv-printshiv.min.js"></script>
+	<script src="libs/respond/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Load Scripts Start -->
+	<script>var scr = {"scripts":[
+		{"src" : "js/libs.js", "async" : false},
+		{"src" : "js/jquery-ui.min.js", "async" : false},
+		{"src" : "js/common.js", "async" : false}
+		]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
+	</script>
+	<!-- Load Scripts End -->
+
 </body>
 </html>

@@ -50,7 +50,10 @@ class Users extends Model
        'experience',
        'description',
        'goals',
-       'boroughs'
+       'boroughs',
+       'email_verified',
+       'phone_verified',
+       'phone_authcode'
    ];
    /**
     * The attributes that should be mutated to dates.
