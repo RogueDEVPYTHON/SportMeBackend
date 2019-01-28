@@ -53,7 +53,16 @@ class Users extends Model
        'boroughs',
        'email_verified',
        'phone_verified',
-       'phone_authcode'
+       'phone_authcode',
+       'account_name',
+       'account_number',
+       'sort_code',
+       'credit_type',
+       'card_number',
+       'name_on_card',
+       'billing_address',
+       'expire_date',
+       'cvc'
    ];
    /**
     * The attributes that should be mutated to dates.

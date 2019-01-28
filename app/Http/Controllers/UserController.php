@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Users;
 use Illuminate\Support\Facades\Storage;
@@ -74,12 +75,64 @@ class UserController extends Controller
         );
     }
     /**
+     * Step register
+     * 
+     * @return void
+     */
+    public function Step_Register(Request $request){
+        //return $request;
+        if($request->step == 1)
+        {
+            $new_user = new Users();
+            $new_user->user_type =2;
+            $new_user->username = $request->first_name.' '.$request->last_name;
+            $new_user->first_name = $request->first_name;
+            $new_user->last_name = $request->last_name;
+            $new_user->email = $request->email;
+            $new_user->password = Hash::make($request->input('password'));;
+            $new_user->birthday = $request->birthday;
+            $new_user->phone_number = $request->phone_number;
+            $new_user->save();
+            $data['user_id'] = $new_user->id;
+            $data['password'] = $request->password;
+            return $data;
+        }
+        if($request->step ==3){
+            $new_user = Users::where('id', $request->user_id)->first();
+            $new_user->account_name = $request->account_name;
+            $new_user->account_number = $request->account_number;
+            $new_user->sort_code = $request->sort_code;
+            $new_user->credit_type = $request->cardType;
+            $new_user->card_number = $request->card_number;
+            $new_user->name_on_card = $request->name_on_card;
+            $new_user->billing_address = $request->billing_address;
+            $new_user->expire_date = $request->expire_date;
+            $new_user->cvc = $request->cvc;
+            $new_user->save();
+            $data['user_id'] = $new_user->id;
+            return $data;
+        }
+    }
+
+    /**
      * Show Registration Form
      * 
      * @return view
      */
     public function showRegistrationForm(){
-        return view('registration');
+        $data['step'] = 1;
+        return view('registration', $data);
+    }
+
+    /**
+     * Show next step
+     * @return view
+     */
+    public function nextStep(Request $request){
+        $data['step'] = $request->step + 1;
+        $data['user'] = Users::where('id', $request->user_id)->first();
+        
+        return view('registration', $data);
     }
 
     /**
@@ -88,12 +141,38 @@ class UserController extends Controller
      * @return void
      */
     public function checkAuthCode(Request $request){
-        $currentuser = Users::where('id', auth()->user()->id)->first();
+        if(!auth()->check())
+            $id = $request->user_id;
+        else
+            $id = auth()->user()->id;
+        $currentuser = Users::where('id', $id)->first();
         if($currentuser->phone_authcode == $request->code){
             $currentuser->phone_verified = 1;
             $currentuser->save();
         }
         return back();
+    }
+
+    /**
+     * Save Bank Detail for coach
+     * 
+     * @return void
+     */
+    public function saveBankDetail(Request $request){
+        $data['step'] = $request->step+1;
+        $currentuser = Users::where('id', $request->user_id)->first();
+        $currentuser->account_name = $request->account_name;
+        $currentuser->account_number = $request->account_number;
+        $currentuser->sort_code = $request->sort_code;
+        $currentuser->creadit_type = $request->radio;
+        $currentuser->card_number = $request->card_number;
+        $currentuser->name_on_card = $request->name_on_card;
+        $currentuser->billing_address = $request->billing_address;
+        $currentuser->expire_date = $request->expire_date;
+        $currentuser->cvc = $request->cvc;
+        //$currentuser->save();
+        $data['user'] = $currentuser;
+        return view('registration', $data);
     }
 
     /**
@@ -190,6 +269,7 @@ class UserController extends Controller
         $new_user->save();
         if($request->user_type == 2){
             $data['user'] = $new_user;
+            $data['step'] = $request->step + 1;
             return view('registration', $data);
         }
         return view('login');
@@ -236,7 +316,7 @@ class UserController extends Controller
             $currentuser->interested_in = $request->interested;
         if(!empty($request->location))
             $currentuser->location = $request->location;
-        if(!empty($request->location))
+        if(!empty($request->coach_in))
             $currentuser->coach_in = $request->coach_in;
         $file = $request->file('profile_photo');
         if(!empty($file)){
@@ -246,7 +326,35 @@ class UserController extends Controller
         }
         //return $currentuser;
         $currentuser->save();
+        if(!auth()->check())
+            return redirect('login');
         return back();
+    }
+    /**
+     * Complete Registration
+     * @return void
+     */
+    public function Complete(Request $request){
+       // return $request;
+        $currentuser = Users::where('id', $request->user_id)->first();
+        $currentuser->interested_in = $request->item;
+        if(!empty($request->coach_in))
+            $currentuser->coach_in = $request->coach_in;
+        $file = $request->file('profile_photo');
+        if(!empty($file)){
+            $destination_path = 'files/' . 'profiles/'.$currentuser->id;
+            Storage::put($destination_path, $file);
+            $currentuser->photo = $destination_path;
+        }  
+        $currentuser->save();
+        //return $currentuser;
+        //$credentials = $currentuser->only('email', 'password');
+       // if (Auth::attempt($credentials)) {
+            // Authentication passed...
+       //     return redirect('/profile');
+        //}
+        return redirect('login');
+              
     }
 
     /**

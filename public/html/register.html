@@ -50,9 +50,7 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-body">
-					<form action="{{ url('/register') }}" method="POST" id="registration">
-					  	@csrf
-					  	<input type="hidden" name="user_type" value="1">
+			      	<form action="#" id="registration">
 				        <div class="row">
 				        	<div class="col-md-8 left">
 				        		<h2>Register with sportme</h2>
@@ -62,13 +60,13 @@
 				        			<div class="col-md-6">
 				        				<div class="form-group">
 				        				    <label for="first_name">First Name</label>
-				        				    <input type="text" class="form-control" name="first_name">
+				        				    <input type="text" class="form-control" id="first_name">
 				        				</div>
 				        			</div>
 				        			<div class="col-md-6">
 				        				<div class="form-group">
 				        				    <label for="last_name">Last Name</label>
-				        				    <input type="text" class="form-control" name="last_name">
+				        				    <input type="text" class="form-control" id="last_name">
 				        				</div>
 				        			</div>
 				        		</div>
@@ -76,7 +74,7 @@
 				        			<div class="col-md-12">
 				        				<div class="form-group">
 				        				    <label for="email">Email</label>
-				        				    <input type="text" class="form-control" name="email">
+				        				    <input type="text" class="form-control" id="email">
 				        				</div>
 				        			</div>
 				        		</div>
@@ -84,13 +82,13 @@
 				        			<div class="col-md-6">
 				        				<div class="form-group">
 				        				    <label for="password">Choose a password</label>
-				        				    <input type="password" class="form-control" name="password">
+				        				    <input type="password" class="form-control" id="password">
 				        				</div>
 				        			</div>
 				        			<div class="col-md-6">
 				        				<div class="form-group">
 				        				    <label for="password_confirm">Re-confirm password</label>
-				        				    <input type="password" class="form-control" name="password_confirm">
+				        				    <input type="password" class="form-control" id="password_confirm">
 				        				</div>
 				        			</div>
 				        		</div>
@@ -98,13 +96,13 @@
 				        			<div class="col-md-6">
 				        				<div class="form-group">
 				        				    <label for="birthday">Birthday</label>
-				        				    <input type="text" class="form-control" name="birthday" placeholder="DD/MM/YYYY">
+				        				    <input type="text" class="form-control" id="birthday" placeholder="DD/MM/YYYY">
 				        				</div>
 				        			</div>
 				        			<div class="col-md-6">
 				        				<div class="form-group">
 				        				    <label for="phone">Phone number</label>
-				        				    <input type="tel" class="form-control" name="phone">
+				        				    <input type="tel" class="form-control" id="phone">
 				        				</div>
 				        			</div>
 				        		</div>
@@ -118,35 +116,35 @@
 			    		        	    	  </button>
 			    		        	    	  <div class="dropdown-menu" aria-labelledby="dropdownMenu">
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radio" type="radio" name="radio" >
+			    	        	    	  			<input class="radio" id="radio" type="radio" name="radio" required="">
 			    	        	    	  			<label for="radio">
 			    	        	    	  				Bodybilding
 			    	        	    	  		  	</label>
 			    		        	    	  	</div>
 			    		        	    	  	<div class="dropdown-divider"></div>
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radio-2" type="radio" name="radio2" >
+			    	        	    	  			<input class="radio" id="radio-2" type="radio" name="radio2" required="">
 			    	        	    	  			<label for="radio-2">
 			    	        	    	  				Aerobic
 			    	        	    	  		  	</label>
 			    		        	    	  	</div>
 			    		        	    	  	<div class="dropdown-divider"></div>
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radio-3" type="radio" name="radio3" >
+			    	        	    	  			<input class="radio" id="radio-3" type="radio" name="radio3" required="">
 			    	        	    	  			<label for="radio-3">
 			    	        	    	  				Yoga
 			    	        	    	  		  	</label>
 			    		        	    	  	</div>
 			    		        	    	  	<div class="dropdown-divider"></div>
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radio-4" type="radio" name="radio4" >
+			    	        	    	  			<input class="radio" id="radio-4" type="radio" name="radio4" required="">
 			    	        	    	  			<label for="radio-4">
 			    	        	    	  				Flexibility
 			    	        	    	  		  	</label>
 			    		        	    	  	</div>
 			    		        	    	  	<div class="dropdown-divider"></div>
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radio-5" type="radio" name="radio5" >
+			    	        	    	  			<input class="radio" id="radio-5" type="radio" name="radio5" required="">
 			    	        	    	  			<label for="radio-5">
 			    	        	    	  				All
 			    	        	    	  		  	</label>
@@ -164,35 +162,35 @@
 			    		        	    	  </button>
 			    		        	    	  <div class="dropdown-menu" aria-labelledby="dropdownMenuCity">
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radioCity" type="radio" name="radioCity" >
+			    	        	    	  			<input class="radio" id="radioCity" type="radio" name="radioCity" required="">
 			    	        	    	  			<label for="radioCity">
 			    	        	    	  				UK 1
 			    	        	    	  		  	</label>
 			    		        	    	  	</div>
 			    		        	    	  	<div class="dropdown-divider"></div>
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radioCity-2" type="radio" name="radioCity2" >
+			    	        	    	  			<input class="radio" id="radioCity-2" type="radio" name="radioCity2" required="">
 			    	        	    	  			<label for="radioCity-2">
 			    	        	    	  				UK 2
 			    	        	    	  		  	</label>
 			    		        	    	  	</div>
 			    		        	    	  	<div class="dropdown-divider"></div>
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radioCity-3" type="radio" name="radioCity3" >
+			    	        	    	  			<input class="radio" id="radioCity-3" type="radio" name="radioCity3" required="">
 			    	        	    	  			<label for="radioCity-3">
 			    	        	    	  				UK 3
 			    	        	    	  		  	</label>
 			    		        	    	  	</div>
 			    		        	    	  	<div class="dropdown-divider"></div>
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radioCity-4" type="radio" name="radioCity4" >
+			    	        	    	  			<input class="radio" id="radioCity-4" type="radio" name="radioCity4" required="">
 			    	        	    	  			<label for="radioCity-4">
 			    	        	    	  				UK 4
 			    	        	    	  		  	</label>
 			    		        	    	  	</div>
 			    		        	    	  	<div class="dropdown-divider"></div>
 			    		        	    	  	<div class="dropdown-item">
-			    	        	    	  			<input class="radio" id="radioCity-5" type="radio" name="radioCity5" >
+			    	        	    	  			<input class="radio" id="radioCity-5" type="radio" name="radioCity5" required="">
 			    	        	    	  			<label for="radioCity-5">
 			    	        	    	  				All
 			    	        	    	  		  	</label>
@@ -206,7 +204,7 @@
 				        	<div class="col-md-4 register">
 				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				        		</button>
-				        		<button type="submit" class="button">Register</button>
+				        		<button class="button">Register</button>
 				        	</div>
 				        </div>
 			        </form>
@@ -220,6 +218,7 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-body">
+			      	<form action="#" id="registration2">
 				        <div class="nav nav-tabs" id="nav-tab" role="tablist">
 				          <a class="nav-item nav-link active" id="nav-step1-tab" data-toggle="tab" href="#nav-step1" role="tab" aria-controls="nav-step1" aria-selected="true">1 Step</a>
 				          <a class="nav-item nav-link" id="nav-step2-tab" data-toggle="tab" href="#nav-step2" role="tab" aria-controls="nav-step2" aria-selected="false">2 Step</a>
@@ -285,7 +284,7 @@
   					        	</div>
   					        	<div class="col-md-4 register coach">
   					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-  					        		<button onclick="javascript:step_register(1)" class="button">Next</button>
+  					        		<button class="button">Next</button>
   					        	</div>
   					        </div>
 				          	
@@ -298,7 +297,7 @@
   	  					        				<h3>Verify Account with Phone Number</h3>
   	  					        				<p>When you press button “Send Me Code” you wil receive an message on your phone with 4 digit code.</p>
   	  					        				<p>Just put this code in field below.</p>
-  	  					        				<a href="javascript:sendVerificationSMS()" class="btn">Send me code</a>
+  	  					        				<a href="#" class="btn">Send me code</a>
 
   	  					        				<p>Just put this code in field below.</p>
   	  					        			</div>
@@ -315,7 +314,7 @@
 				        					<div class="col-12">
   	  					        				<h3>Verify Account with Email</h3>
   	  					        				<p>When you press button “Send Me Email” you wil receive an email, just go and click on link in email.</p>
-  	  					        				<a href="javascript:sendVerificationEmail()" class="btn">Send me email</a>
+  	  					        				<a href="#" class="btn">Send me email</a>
   	  					        			</div>
   	  					        		</div>
   	  					        	</div>
@@ -326,7 +325,6 @@
   	  					        </div>
 				          </div>
 				          <div class="tab-pane fade" id="nav-step3" role="tabpanel" aria-labelledby="nav-step3-tab">
-							  <input type="hidden" id="user_id_step2" value="">
   					          	<div class="row">
   	  					        	<div class="col-md-8 left">
   	  					        		<div class="row">
@@ -428,14 +426,11 @@
   	  					        	</div>
   	  					        	<div class="col-md-4 register coach">
   	  					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-  	  					        		<button onclick="javascript:step_register(3)" class="button">Next</button>
+  	  					        		<button class="button">Next</button>
   	  					        	</div>
   	  					        </div>
 				          </div>
 				          <div class="tab-pane fade" id="nav-step4" role="tabpanel" aria-labelledby="nav-step4-tab">
-							  <form action="{{ url('register_step4') }}" method="POST" enctype="multipart/form-data">
-							  	<input type="hidden" id="user_id_step3" name="user_id" value="">
-									@csrf
   					          	<div class="row">
   	  					        	<div class="col-md-8 left">
   	  					        		<div class="row">
@@ -451,14 +446,14 @@
     				    		        	    	  </button>
     				    		        	    	  <div class="dropdown-menu" aria-labelledby="coachType">
     				    		        	    	  	<div class="dropdown-item">
-    				    	        	    	  			<input class="radio" id="item1" type="radio" name="item" required="">
+    				    	        	    	  			<input class="radio" id="item1" type="radio" name="item1" required="">
     				    	        	    	  			<label for="item1">
     				    	        	    	  				Item 1
     				    	        	    	  		  	</label>
     				    		        	    	  	</div>
     				    		        	    	  	<div class="dropdown-divider"></div>
     				    		        	    	  	<div class="dropdown-item">
-    				    	        	    	  			<input class="radio" id="item2" type="radio" name="item" required="">
+    				    	        	    	  			<input class="radio" id="item2" type="radio" name="item2" required="">
     				    	        	    	  			<label for="item2">
     				    	        	    	  				Item 2
     				    	        	    	  		  	</label>
@@ -470,7 +465,7 @@
   	  					        			<div class="col-md-6">
   	  					        				<div class="form-group">
   	  					        				    <label for="coach_in">&nbsp;</label>
-  	  					        				    <input type="text" class="form-control" name="coach_in" placeholder="Write here">
+  	  					        				    <input type="text" class="form-control" id="coach_in" placeholder="Write here">
   	  					        				</div>
   	  					        			</div>
   	  					        		</div>
@@ -483,7 +478,7 @@
   	  					        			<div class="col-md-4">
   	  					        				<div class="file-upload">
   	  					        					<div class="image-upload-wrap">
-  	  					        					  <input class="file-upload-input" type='file' onchange="readURL(this);" name="profile_photo" accept="image/*" />
+  	  					        					  <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
   	  					        					</div>
   	  					        				  	<button class="file-upload-btn btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Upload photo</button>
   	  					        				</div>
@@ -499,12 +494,12 @@
   	  					        	</div>
   	  					        	<div class="col-md-4 register coach">
   	  					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-  	  					        		<button type="submit" class="button">Next</button>
+  	  					        		<button class="button">Next</button>
   	  					        	</div>
-								</div>
-							  <form>	
+  	  					        </div>
 				          </div>
 				        </div>
+			        </form>
 			      </div>
 			    </div>
 			  </div>
@@ -530,81 +525,6 @@
 		]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
 	</script>
 	<!-- Load Scripts End -->
-	<script>
-		function step_register(step){
-			first_name = $('#first_name_coach').val();
-			last_name = $('#second_name').val();
-			email = $('#email_coach').val();
-			password = $('#password_coach').val();
-			birthday = $('#birthday_coach').val();
-			phone_number = $('#phone_number').val();
-			account_name = $('#account_name').val();
-			account_number = $('#account_number').val();
-			sort_code = $('#sort_code').val();
-			cardType = $('#cardType').val();
-			card_number = $('#card_number').val();
-			name_on_card = $('#name_on_card').val();
-			billing_address = $('#billing_address').val();
-			expire_date = $('#expire_date').val();
-			user_id = $('#user_id_step2').val();
-			cvc = $('#cvc').val();
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-			$.post('/step_register', { 
-				'_token': '{{csrf_token()}}',
-				'user_type' : 2,
-				'step' : step,
-				'first_name' : first_name,
-				'last_name' : last_name,
-				'email' : email,
-				'password' : password,
-				'birthday' : birthday,
-				'phone_number' : phone_number,
-				'account_name' : account_name,
-				'account_number' : account_number,
-				'sort_code' : sort_code,
-				'cardType' : cardType,
-				'card_number' : card_number,
-				'name_on_card' : name_on_card,
-				'billing_address' : billing_address,
-				'expire_date' : expire_date,
-				'user_id' : user_id,
-				'cvc' : cvc, },
-				function(data){
-					//alert("Verification SMS is sent to your phone number.")
-					$('#user_id_step2').val(data['user_id']);
-					$('#user_id_step3').val(data['user_id']);
-				}
-			);
-		}
-		function sendVerificationEmail(){
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-			$.post('/sendVerificationEmail', {},
-				function(data){
-					alert("Verification email is sent to your email.")
-				}
-			);
-		}
-		function sendVerificationSMS(){
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-			$.post('/sendVerificationSMS', {},
-				function(data){
-					alert("Verification SMS is sent to your phone number.")
-				}
-			);
-		}
-	</script>
 
 </body>
 </html>

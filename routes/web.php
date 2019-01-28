@@ -26,6 +26,9 @@ Route::post('signup', 'UserController@Signup_user');
 Route::get('logout', 'UserController@Signout');
 Route::get('showRegistrationForm', 'UserController@showRegistrationForm');
 Route::post('register', 'UserController@Register');
+Route::post('nextStep', 'UserController@nextStep');
+Route::post('step_register', 'UserController@Step_Register');
+Route::post('register_step4', 'UserController@Complete');
 /* Login/SignUp */
 
 /* Start Account Section */
@@ -34,6 +37,7 @@ Route::post('updateAccountInfo', 'UserController@updateAccountInfo');
 Route::post('sendVerificationEmail', 'UserController@sendVerificationEmail');
 Route::post('sendVerificationSMS', 'UserController@sendVerificationSMS');
 Route::post('checkAuthCode', 'UserController@checkAuthCode');
+Route::post('saveBankDetail', 'UserController@saveBankDetail');
 /* End Account Section */
 
 /* Start Booking Section */

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Bookings dashboard</title>
+	<meta name="description" content="">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<meta property="og:image" content="path/to/image.jpg">
+
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,600,700,700i" rel="stylesheet">
+	<!-- Header CSS (First Sections of Website: paste after release from header.min.css here) -->
+	<style></style>
+
+	<!-- Load CSS, CSS Localstorage & WebFonts Main Function -->
+	<script>!function(e){"use strict";function t(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function n(t,n){return e.localStorage&&localStorage[t+"_content"]&&localStorage[t+"_file"]===n}function a(t,a){if(e.localStorage&&e.XMLHttpRequest)n(t,a)?o(localStorage[t+"_content"]):l(t,a);else{var s=r.createElement("link");s.href=a,s.id=t,s.rel="stylesheet",s.type="text/css",r.getElementsByTagName("head")[0].appendChild(s),r.cookie=t}}function l(e,t){var n=new XMLHttpRequest;n.open("GET",t,!0),n.onreadystatechange=function(){4===n.readyState&&200===n.status&&(o(n.responseText),localStorage[e+"_content"]=n.responseText,localStorage[e+"_file"]=t)},n.send()}function o(e){var t=r.createElement("style");t.setAttribute("type","text/css"),r.getElementsByTagName("head")[0].appendChild(t),t.styleSheet?t.styleSheet.cssText=e:t.innerHTML=e}var r=e.document;e.loadCSS=function(e,t,n){var a,l=r.createElement("link");if(t)a=t;else{var o;o=r.querySelectorAll?r.querySelectorAll("style,link[rel=stylesheet],script"):(r.body||r.getElementsByTagName("head")[0]).childNodes,a=o[o.length-1]}var s=r.styleSheets;l.rel="stylesheet",l.href=e,l.media="only x",a.parentNode.insertBefore(l,t?a:a.nextSibling);var c=function(e){for(var t=l.href,n=s.length;n--;)if(s[n].href===t)return e();setTimeout(function(){c(e)})};return l.onloadcssdefined=c,c(function(){l.media=n||"all"}),l},e.loadLocalStorageCSS=function(l,o){n(l,o)||r.cookie.indexOf(l)>-1?a(l,o):t(e,"load",function(){a(l,o)})}}(this);</script>
+
+	<!-- Load CSS Start -->
+	<script>loadLocalStorageCSS( "webfonts", "css/fonts.min.css?ver=1.0.0" );</script>
+	<script>loadCSS( "css/header.min.css?ver=1.0.0", false, "all" );</script>
+	<script>loadCSS( "css/main.min.css?ver=1.0.0", false, "all" );</script>
+	<!-- Load CSS End -->
+
+	<!-- Load CSS Compiled without JS -->
+	<noscript>
+		<link rel="stylesheet" href="css/fonts.min.css">
+		<link rel="stylesheet" href="css/main.min.css">
+	</noscript>
+
+</head>
+
+<body>
+<!-- Here our code  -->
+<!-- Modal -->
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookModalLabel">Select available day and location</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div id="datepicker"></div>
+        <span class="title">Choose Location</span>
+        <span class="text-i">Choose location where you want to meet with this coach</span>
+       	<input type="text" class="form-control" placeholder="Location">
+       	<span class="text-i">You want to start session on the 01/25/2019 from 9:00 AM to 11:00 AM with Francis Dos Santos</span>
+       	<span class="text-i"><b>Total to pay: - 70£</b> (Hourly Rate for this coach is <b>35£/hr</b>)</span>
+       	<a href="#" class="btn proceed" data-toggle="modal" data-target="#proceedModal">Proceed to payment</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="proceedModal" tabindex="-1" role="dialog" aria-labelledby="proceedModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookModalLabel">Choose payment method</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<p><b>To book this session, please pay 70£ for 2 hours session with Francis Dos Santos</b></p>
+      	<span class="title">Billing methods</span>
+      	<ul class="billing">
+      		<li>
+      			<input class="radio" id="radio-1" type="radio" name="radio" required="" checked>
+      			<label for="radio-1">
+      				<div class="logo">
+      					<img src="./img/mastercard.png" alt="">
+      				</div>
+      				<span class="text">MasterVard ending in 0415</span>
+      			</label>
+      		</li>
+      		<li>
+      			<input class="radio" id="radio-2" type="radio" name="radio" required="" checked>
+      			<label for="radio-2">
+      				<div class="logo">
+      					<img src="./img/paypal.png" alt="">
+      				</div>
+      				<span class="text">PayPal - someemail@gmail.com</span>
+      			</label>
+      		</li>
+      	</ul>
+       	<a href="#" class="btn continue" data-toggle="modal" data-target="#statusModal">Continue</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="statusModalLabel">Payment status</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div class="status-image">
+      		<img src="./img/accepted.png" alt="">
+      	</div>
+      	<span class="title text-center">Your payment was accepted</span>
+      	<p class="text-center">You start a session with <b>Francis Dos Santos</b> on <b>01/25/2019 </b><br>
+			from <b>9:00 AM</b> to <b>11:00 AM</b></p>
+
+		<a href="#" class="profile-link">
+			<div class="avatar">
+				<img src="./img/booking1.png" alt="">
+			</div>
+			Francis Dos Santos Profile
+		</a>
+       	<a href="#" class="btn back" data-dismiss="modal" aria-label="Close">Back to dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12 header-container">
+			<header>
+				<nav class="navbar navbar-expand-md navbar-light">
+				  <a class="navbar-brand col-md-3 " href="#"><img src="./img/logo.png" alt=""></a>
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				    <span class="navbar-toggler-icon"></span>
+				  </button>
+
+				  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				  	<a href="#" class="back">Back to <b>Home page</b></a>
+				  	<form class="form-inline my-2 my-lg-0 mr-auto">
+				  		<button class="btn my-2 my-sm-0" type="submit"></button>
+				  	  	<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				  	</form>
+				    <ul class="navbar-nav ml-auto">
+				      <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          Hi, Marcus 
+				          <div class="avatar">
+				          	<img src="./img/avatar_customer.png" width="64" height="64" alt="">
+				          </div>
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				          <a class="dropdown-item" href="#">Action</a>
+				          <a class="dropdown-item" href="#">Another action</a>
+				          <div class="dropdown-divider"></div>
+				          <a class="dropdown-item" href="#">Something else here</a>
+				        </div>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link settings" href="#"></a>
+				      </li>
+				    </ul>
+				    
+				  </div>
+				</nav>
+			</header>
+		</div>
+
+	<div class="sidebar col-md-3 order-2 order-md-1">
+		<ul class="menu">
+			<li><a href="#" class="type1">Dashboard</a></li>
+			<li><a href="#" class="type2">Profile</a></li>
+			<li><a href="#" class="type3">Bookings</a></li>
+			<li><a href="#" class="type4">Completed Sessions</a></li>
+			<li><a href="#" class="type9 active">Coaches</a></li>
+			<li><a href="#" class="type5">Payments</a></li>
+			<li><a href="#" class="type7">Settings</a></li>
+			<li>
+				<a href="#" class="type8">Logout</a>
+				<div class="copyright">All Right Reserved © SportMe.com</div>
+			</li>
+		</ul>
+		
+	</div>
+
+	<div class="content col-md-9 offset-md-3 order-1 order-md-2">
+		<div class="row filter">
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col">
+		    	    	<div class="form-group">
+		        	    	<label for="">Location</label>
+		        	    	<div class="dropdown">
+		        	    	  <button class="dropdown-toggle custom-select" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        	    	    Choose your location
+		        	    	  </button>
+		        	    	  <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+		        	    	  	<div class="dropdown-item">
+	        	    	  			<input class="radio" id="radio" type="radio" name="radio" required="">
+	        	    	  			<label for="radio">
+	        	    	  				Firstborough
+	        	    	  		  	</label>
+		        	    	  	</div>
+		        	    	  	<div class="dropdown-divider"></div>
+		        	    	  	<div class="dropdown-item">
+	        	    	  			<input class="radio" id="radio-2" type="radio" name="radio2" required="">
+	        	    	  			<label for="radio-2">
+	        	    	  				Secondborough
+	        	    	  		  	</label>
+		        	    	  	</div>
+		        	    	  	<div class="dropdown-divider"></div>
+		        	    	  	<div class="dropdown-item">
+	        	    	  			<input class="radio" id="radio-3" type="radio" name="radio3" required="">
+	        	    	  			<label for="radio-3">
+	        	    	  				Thirdborough
+	        	    	  		  	</label>
+		        	    	  	</div>
+		        	    	  	<div class="dropdown-divider"></div>
+		        	    	  	<div class="dropdown-item">
+	        	    	  			<input class="radio" id="radio-4" type="radio" name="radio4" required="">
+	        	    	  			<label for="radio-4">
+	        	    	  				Fourthborough
+	        	    	  		  	</label>
+		        	    	  	</div>
+		        	    	  	<div class="dropdown-divider"></div>
+		        	    	  	<div class="dropdown-item">
+	        	    	  			<input class="radio" id="radio-5" type="radio" name="radio5" required="">
+	        	    	  			<label for="radio-5">
+	        	    	  				Fifthborough
+	        	    	  		  	</label>
+		        	    	  	</div>
+		        	    	  </div>
+		        	    	</div>
+		        	    </div>
+					</div>
+					<div class="col">
+		    	    	<div class="form-group">
+		        	    	<label for="">Activity type</label>
+		        	    	<select class="custom-select">
+		        	    	  <option selected>Choose activity</option>
+		        	    	  <option value="1">One</option>
+		        	    	  <option value="2">Two</option>
+		        	    	  <option value="3">Three</option>
+		        	    	</select>
+		        	    </div>
+					</div>
+					<div class="col">
+		    	    	<div class="form-group">
+		        	    	<label for="">Hourly rate</label>
+		        	    	<select class="custom-select">
+		        	    	  <option selected>Choose hourly rate of coaches</option>
+		        	    	  <option value="1">One</option>
+		        	    	  <option value="2">Two</option>
+		        	    	  <option value="3">Three</option>
+		        	    	</select>
+		        	    </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 text-right">
+    	    	<a href="#" class="btn find-coach">Find coach</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="block">
+					<!-- list of bookings -->
+					<div class="coach-item">
+						<div class="left">
+							<div class="avatar">
+								<img src="./img/booking1.png" alt="">
+							</div>
+						</div>
+						<div class="right">
+							<div class="row">
+								<div class="col">
+									<span class="title-b">Francis Dos Santos</span>
+									<span class="title-s">2213 Street Name, London</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Rating</span>
+									<ul class="rate_stars">
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star half"></li>
+									</ul>
+									<span class="rate-text">4.67 of 5</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Activity Types</span>
+									<span class="title-s">Gym, Yoga, Cross-fit</span>
+								</div>
+								<div class="col">
+									<div class="centered-col">
+										<div class="left">
+											<span class="title-b">Distance</span>
+											<span class="title-s">100 m</span>	
+										</div>
+										<div class="right">
+											<span class="price">35£/hr</span>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<a href="#" class="btn" data-toggle="modal" data-target="#bookModal">Book</a>
+								</div>
+							</div>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut accumsan sem. Praesent elementum ac tellus eu dictum. Praesent rutrum est varius sollicitudin bibendum. Vestibulum in dolor nisi. In in ipsum vitae risus egestas sodales vel nec urna. Suspendisse potenti. Nam sed tempor neque. Donec bibendum venenatis orci vel posuere. </p>
+						</div>
+					</div>
+
+					<div class="coach-item">
+						<div class="left">
+							<div class="avatar">
+								<img src="./img/booking2.png" alt="">
+							</div>
+						</div>
+						<div class="right">
+							<div class="row">
+								<div class="col">
+									<span class="title-b">Matt Hyuto</span>
+									<span class="title-s">424 Street Name, London</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Rating</span>
+									<ul class="rate_stars">
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star"></li>
+									</ul>
+									<span class="rate-text">4 of 5</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Activity Types</span>
+									<span class="title-s">Gym, Cross-fit</span>
+								</div>
+								<div class="col">
+									<div class="centered-col">
+										<div class="left">
+											<span class="title-b">Distance</span>
+											<span class="title-s">450 m</span>	
+										</div>
+										<div class="right">
+											<span class="price">30£/hr</span>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<a href="#" class="btn" data-toggle="modal" data-target="#bookModal">Book</a>
+								</div>
+							</div>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut accumsan sem. Praesent elementum ac tellus eu dictum. Praesent rutrum est varius sollicitudin bibendum. Vestibulum in dolor nisi. In in ipsum vitae risus egestas sodales vel nec urna. Suspendisse potenti. Nam sed tempor neque. Donec bibendum venenatis orci vel posuere. </p>
+						</div>
+					</div>
+
+					<div class="coach-item">
+						<div class="left">
+							<div class="avatar">
+								<img src="./img/booking3.png" alt="">
+							</div>
+						</div>
+						<div class="right">
+							<div class="row">
+								<div class="col">
+									<span class="title-b">Saimon Lockely</span>
+									<span class="title-s">51B Street Name, London</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Rating</span>
+									<ul class="rate_stars">
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star"></li>
+										<li class="star"></li>
+									</ul>
+									<span class="rate-text">3 of 5</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Activity Types</span>
+									<span class="title-s">Gym, Yoga, Cross-fit</span>
+								</div>
+								<div class="col">
+									<div class="centered-col">
+										<div class="left">
+											<span class="title-b">Distance</span>
+											<span class="title-s">680 m</span>	
+										</div>
+										<div class="right">
+											<span class="price">25£/hr</span>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<a href="#" class="btn" data-toggle="modal" data-target="#bookModal">Book</a>
+								</div>
+							</div>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut accumsan sem. Praesent elementum ac tellus eu dictum. Praesent rutrum est varius sollicitudin bibendum. Vestibulum in dolor nisi. In in ipsum vitae risus egestas sodales vel nec urna. Suspendisse potenti. Nam sed tempor neque. Donec bibendum venenatis orci vel posuere. </p>
+						</div>
+					</div>
+
+					<div class="coach-item">
+						<div class="left">
+							<div class="avatar">
+								<img src="./img/booking4.png" alt="">
+							</div>
+						</div>
+						<div class="right">
+							<div class="row">
+								<div class="col">
+									<span class="title-b">Nadia Kosovsky</span>
+									<span class="title-s">42C Street Name, London</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Rating</span>
+									<ul class="rate_stars">
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star"></li>
+									</ul>
+									<span class="rate-text">4 of 5</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Activity Types</span>
+									<span class="title-s">Gym, Yoga, Cross-fit</span>
+								</div>
+								<div class="col">
+									<div class="centered-col">
+										<div class="left">
+											<span class="title-b">Distance</span>
+											<span class="title-s">2 miles</span>	
+										</div>
+										<div class="right">
+											<span class="price">25£/hr</span>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<a href="#" class="btn" data-toggle="modal" data-target="#bookModal">Book</a>
+								</div>
+							</div>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut accumsan sem. Praesent elementum ac tellus eu dictum. Praesent rutrum est varius sollicitudin bibendum. Vestibulum in dolor nisi. In in ipsum vitae risus egestas sodales vel nec urna. Suspendisse potenti. Nam sed tempor neque. Donec bibendum venenatis orci vel posuere. </p>
+						</div>
+					</div>
+
+					<div class="coach-item">
+						<div class="left">
+							<div class="avatar">
+								<img src="./img/booking5.png" alt="">
+							</div>
+						</div>
+						<div class="right">
+							<div class="row">
+								<div class="col">
+									<span class="title-b">Madison Lawrence</span>
+									<span class="title-s">762 Street Name, London</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Rating</span>
+									<ul class="rate_stars">
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+										<li class="star fill"></li>
+									</ul>
+									<span class="rate-text">5 of 5</span>
+								</div>
+								<div class="col">
+									<span class="title-b">Activity Types</span>
+									<span class="title-s">Gym, Yoga, Cross-fit</span>
+								</div>
+								<div class="col">
+									<div class="centered-col">
+										<div class="left">
+											<span class="title-b">Distance</span>
+											<span class="title-s">3 miles</span>	
+										</div>
+										<div class="right">
+											<span class="price">25£/hr</span>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<a href="#" class="btn" data-toggle="modal" data-target="#bookModal">Book</a>
+								</div>
+							</div>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut accumsan sem. Praesent elementum ac tellus eu dictum. Praesent rutrum est varius sollicitudin bibendum. Vestibulum in dolor nisi. In in ipsum vitae risus egestas sodales vel nec urna. Suspendisse potenti. Nam sed tempor neque. Donec bibendum venenatis orci vel posuere. </p>
+						</div>
+					</div>
+
+					<!-- list of bookings end -->
+					<div class="text-center">
+						<a href="#" class="more">Load more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+	<div class="hidden"></div>
+
+	<!--[if lt IE 9]>
+	<script src="libs/html5shiv/es5-shim.min.js"></script>
+	<script src="libs/html5shiv/html5shiv.min.js"></script>
+	<script src="libs/html5shiv/html5shiv-printshiv.min.js"></script>
+	<script src="libs/respond/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Load Scripts Start -->
+	<script>var scr = {"scripts":[
+		{"src" : "js/libs.js", "async" : false},
+		{"src" : "js/jquery-ui.min.js", "async" : false},
+		{"src" : "js/common.js", "async" : false}
+		]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
+	</script>
+	<!-- Load Scripts End -->
+
+</body>
+</html>
